@@ -26,3 +26,43 @@ function refresh()
     });
 }
 
+ 
+
+
+function findcountry()
+{
+     
+     var url = "https://api.covid19api.com/summary";
+     var getinput = document.getElementById("countrysearch").value;
+     var flag = 0;
+     
+        var tbval = document.getElementById("tablevalue");
+        $.get(url,function(data)
+        {
+            for(var i = 1;i<data['Countries'].length;i++)
+            {
+                if(data['Countries'][i-1]['Country'].toLowerCase() !== getinput.toLowerCase())
+                {
+
+                    tbval.rows[i].style.display = "none";
+                    flag++;
+                }
+               
+            }  
+        });
+        $.get(url,function(data)
+        {
+            if(flag === data['Countries'].length -1)
+        {
+            alert("Sorry Country not found. Please refresh before proceeding");
+        }
+        });
+        
+       
+        
+        
+}
+function reloading()
+{
+    window.location.reload();
+}
